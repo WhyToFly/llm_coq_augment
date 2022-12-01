@@ -1,0 +1,33 @@
+python training_scripts/run_clm_streaming_flax.py \
+    --output_dir gpt-neo-125M-coq \
+    --model_name_or_path="EleutherAI/gpt-neo-125M" \
+    --tokenizer_name="EleutherAI/gpt-neo-125M" \
+    --dataset_name training_scripts/code_clippy.py \
+    --data_dir train_data \
+    --text_column_name="text" \
+    --do_train --do_eval \
+    --block_size="2048" \
+    --per_device_train_batch_size="1" \
+    --per_device_eval_batch_size="1" \
+    --preprocessing_num_workers="8" \
+    --learning_rate="1e-4" \
+    --max_steps 100000 \
+    --warmup_steps 2500 \
+    --decay_steps 25000 \
+    --adam_beta1="0.9" \
+    --adam_beta2="0.95" \
+    --weight_decay="0.1" \
+    --overwrite_output_dir \
+    --logging_steps="100" \
+    --eval_steps="500" \
+    --push_to_hub="False" \
+    --report_to="all" \
+    --dtype="float16" \
+    --skip_memory_metrics="True" \
+    --save_steps="100" \
+    --save_total_limit 10 \
+    --gradient_accumulation_steps 16 \
+    --report_to="wandb" \
+    --run_name="125m_1e-4lr_1024bs" \
+    --max_eval_samples 2000 \
+    --save_optimizer true
